@@ -9,6 +9,7 @@ const insertData = async()=> {
         dotenv.config()
         Mongoose.connect(process.env.MONGODB_URL,{useNewUrlParser:true,useUnifiedTopology:true})
         .then(async()=>{
+            await Product.deleteMany({});
             console.log(`Database connected`)
             await Product.insertMany(data);
             console.log('Data inserted successfully');

@@ -1,4 +1,11 @@
-import { FETCH_DATA, FETCH_SUCCESS } from "../constants/actionType";
+import {
+  FETCH_ALL_DATA,
+  FETCH_SUCCESS,
+  FETCH_SINGLE_DATA,
+  FETCH_SINGLE_DATA_SUCCESS,
+  REVIEW,
+  REVIEW_SUCCESS,
+} from "../constants/actionType";
 
 const intialState = {
   loading: true,
@@ -8,7 +15,7 @@ const intialState = {
 
 export function Product(state = intialState, action) {
   switch (action.type) {
-    case FETCH_DATA:
+    case FETCH_ALL_DATA:
       return {
         loading: true,
         product: [],
@@ -18,8 +25,42 @@ export function Product(state = intialState, action) {
       return {
         loading: false,
         product: action.payload,
+      };
+
+    default:
+      return state;
+  }
+}
+
+const intialStateS = {
+  loading: true,
+  SingleProduct: [],
+  error: false,
+};
+
+export function SingleProduct(state = intialStateS, action) {
+  switch (action.type) {
+    case FETCH_SINGLE_DATA:
+      return {
+        loading: true,
+        SingleProduct: [],
         error: false,
       };
+    case FETCH_SINGLE_DATA_SUCCESS:
+      return {
+        loading: false,
+        SingleProduct: action.payload,
+      };
+      case REVIEW:
+      return {
+        loading: true,
+        SingleProduct: action.payload,
+      };
+      case REVIEW_SUCCESS:
+        return {
+          loading: false,
+          SingleProduct: action.payload,
+        };
 
     default:
       return state;

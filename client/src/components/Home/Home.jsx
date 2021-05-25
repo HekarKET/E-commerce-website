@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import Card from './Card'
 import {useDispatch, useSelector} from 'react-redux'
-import { fetchProduct } from '../../actions/setProduct'
+import { fetchProducts } from '../../actions/setProduct'
 
 
 const Wrapper = styled.div`
@@ -25,7 +25,7 @@ function Home() {
     const productState = useSelector(state => state.Product)
     const dispatch = useDispatch()
     useEffect(()=>{
-        dispatch(fetchProduct());  
+        dispatch(fetchProducts());  
     },[dispatch])
     return (
         <Wrapper>
@@ -34,6 +34,7 @@ function Home() {
             productState.product.map((prod)=>(
                 <Card
                 key = {prod._id}
+                id = {prod._id}
                 img = {prod.Image}
                 title = {prod.Title}
                 price = {prod.Price}

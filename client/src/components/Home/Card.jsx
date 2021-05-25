@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import {Link} from 'react-router-dom';
 
 const Wrapper = styled.div`
     width: 250px;
@@ -32,11 +33,12 @@ const Stars = styled.i`
 
 `
 
-function Card({img,title,price,stars}) {
-
+function Card({id,img,title,price,stars}) {
+ 
     return (
-        
+        <Link to = {`/Product/${id}`}>  
         <Wrapper>
+                     
             <Image src={img}></Image>
             
             <Title>{title}</Title>
@@ -47,8 +49,10 @@ function Card({img,title,price,stars}) {
             </Star>
             <Price>Rs. {price}</Price>
          
-           
+         
+ 
         </Wrapper>
+        </Link>
     )
 }
 
