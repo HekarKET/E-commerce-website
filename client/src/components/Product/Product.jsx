@@ -74,7 +74,7 @@ const Rating = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     margin-top: 10px;
     width: 100%;
     height: 100%;
@@ -149,13 +149,14 @@ function Product({match}) {
                         <Rating>                           
                             <p>Ratings & Reviews:</p> 
                             <Star>
-                                {data.SingleProduct.Stars}
+                                {Number(data.SingleProduct.Stars).toFixed(2)}
                                 <Stars className="fas fa-star"></Stars>
                             </Star>                
                             <Link to={`/review/${data.SingleProduct._id}`}><RateProduct>Rate product</RateProduct></Link>
                         </Rating>
                         {data.SingleProduct.Review.map(rev=>(
                             <Review
+                            key = {rev._id}
                             createdAt={rev.createdAt}
                             star={rev.star}
                             review={rev.review}

@@ -56,7 +56,7 @@ function Rating() {
     }
     const submitReview = ()=>{
         const Review = {star,review,user:"Akhilesh"}
-    
+        window.location.href = `/Product/${productData.SingleProduct._id}`;
         dispatch(reviewProduct(productData.SingleProduct._id,Review))
 
     }
@@ -66,6 +66,7 @@ function Rating() {
             <StarThis>
                 <p>Rate this product:</p>
                 <ReactStars
+                
                 count={5}
                 onChange={handleChange}
                 size={24}

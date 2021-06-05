@@ -1,7 +1,8 @@
 import dotenv from "dotenv";
 import express, { json, urlencoded } from 'express';
 import cookieParser from 'cookie-parser';
-import jwt from 'jsonwebtoken';
+import UserRout from "./routes/user.js";
+
 import Mongoose from 'mongoose';
 import ProductRout from './routes/product.js'
 import cors from 'cors';
@@ -14,6 +15,7 @@ app.use(cookieParser());
 
 
 app.use('/Product',ProductRout)
+app.use("/User", UserRout);
 
 const PORT = process.env.PORT || 4000;
 Mongoose.connect(process.env.MONGODB_URL,{useNewUrlParser:true,useUnifiedTopology:true})

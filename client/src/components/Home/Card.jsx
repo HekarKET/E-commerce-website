@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom';
+import ReactStars from "react-rating-stars-component";
 
 const Wrapper = styled.div`
     width: 250px;
@@ -17,21 +18,13 @@ height: 80%;
 `
 
 const Title = styled.p`
-
-
-
-
+   
 `
 const Price = styled.p``
 const Star = styled.div`
 display: flex;
 `
-const Stars = styled.i`
-    color: yellow;
-    font-size: 10px;
-    text-shadow: 0 0 1px #000;
 
-`
 
 function Card({id,img,title,price,stars}) {
  
@@ -43,8 +36,13 @@ function Card({id,img,title,price,stars}) {
             
             <Title>{title}</Title>
             <Star>
-            {[...Array(stars)].map((e,i) => <Stars className="fas fa-star" key={i}></Stars>)}
-            {[...Array(5-stars)].map((e,i) => <Stars className="far fa-star" key={i}></Stars>)}
+            <ReactStars
+                count={5}
+                 value={stars}   
+                size={24}
+                activeColor="#ffd700"
+                edit={false}
+                />
             
             </Star>
             <Price>Rs. {price}</Price>

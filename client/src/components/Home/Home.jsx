@@ -18,6 +18,7 @@ width: 100%;
 justify-content: center;
 align-items: center;
 gap: 5px;
+row-gap: 30px;
 `
 
 function Home() {

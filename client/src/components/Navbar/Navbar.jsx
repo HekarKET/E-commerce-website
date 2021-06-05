@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 import {useSelector} from 'react-redux'
 const Wrapper = styled.div`
 height: 50px;
@@ -7,6 +8,18 @@ background-color: #333;
 width: 100%;
 
 `
+const StyledLink = styled(Link)`
+
+    text-decoration: none;
+    color: white;
+     &:hover {
+        text-decoration: none;
+        color: red;
+    }
+
+`
+
+
 const NavItems = styled.ul`
 display: flex;
 flex-direction: row;
@@ -26,14 +39,14 @@ flex-grow: 1;
 
 
 function Navbar() {
-    const loginStatus = useSelector(state => state.loginStatus)
+    const userLogin = useSelector(state => state.userLogin)
     return (
         <React.Fragment>
             <Wrapper>
                 <NavItems>
-                    <LeftItem>E commerce Website</LeftItem>
+                    <LeftItem><StyledLink to='/' >E commerce Website</StyledLink></LeftItem>
                     <RightItems> Cart </RightItems>
-                    { loginStatus ?  <RightItems>Profile</RightItems>:<RightItems>Sign In</RightItems>}
+                    { userLogin.login ?  <RightItems><StyledLink to='/profile'>Profile</StyledLink></RightItems>:<RightItems><StyledLink to='/register'>Sign in</StyledLink></RightItems>}
                 </NavItems>  
             </Wrapper>
         </React.Fragment>

@@ -14,13 +14,13 @@ const Comment = styled.p`
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 10px
+    gap: 10px;
 `
 const Details = styled.p`
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 10px
+    gap: 10px;
 `
 
 function Review({createdAt,star,review,user}) {

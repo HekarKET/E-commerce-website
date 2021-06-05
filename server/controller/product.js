@@ -28,7 +28,10 @@ export const getReview = async (req, res) => {
   const Review = req.body;
   try {
     const data = await Product.findById(id);
-    console.log(Review);
+    const stars =
+      (data.Stars * data.Review.length + Review.star) /
+      (data.Review.length + 1);
+    data.Stars = stars;
     data.Review.push(Review);
     const product = await Product.findByIdAndUpdate(id, data, { new: true });
     res.status(200).json(product);

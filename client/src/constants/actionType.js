@@ -1,4 +1,7 @@
-export const setLogin = "setLogin";
+export const USER_LOGIN = "USER_LOGIN";
+export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS";
+export const CREATE_USER = "CREATE_USER";
+export const CREATE_USER_SUCCESS = "CREATE_USER_SUCCESS";
 export const FETCH_ALL_DATA = "FETCH_ALL_DATA";
 export const FETCH_SINGLE_DATA = "FETCH_ALL_DATA";
 export const FETCH_SINGLE_DATA_SUCCESS = "FETCH_ALL_DATA_SUCCESS";
