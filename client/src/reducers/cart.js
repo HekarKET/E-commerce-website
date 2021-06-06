@@ -14,10 +14,15 @@ export function cart(state = initialState, action) {
     case REMOVE_FROM_CART:
       return state.filter((state) => state._id !== action.payload);
     case UPDATE_CART:
-      const index = state.findIndex((obj) => obj._id === action.payload.id);
-      state[index].selected = action.payload.qty;
-      return state;
-
+      return state.map((item) => {
+        if (item._id !== action.payload.id) {
+          return item;
+        }
+        return {
+          ...item,
+          selected: action.payload.qty,
+        };
+      });
     default:
       return state;
   }

@@ -49,16 +49,14 @@ const Delete = styled.button`
 
 function Grid({id,title,owner,price,image,quantity,selected}) {
     const dispatch = useDispatch()
-    
-    const handleQtychange = (e)=>{
-        
+    const handleQtychange = (e)=>{  
         dispatch(updateFromCart(id,e.target.value));
-
     }
     const handleDelete =  (e)=>{
+        
         dispatch(removeFromCart(id))
     }
-    
+  
     return (
        
             

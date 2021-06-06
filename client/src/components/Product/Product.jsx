@@ -44,6 +44,7 @@ const AddToCart = styled.button`
     text-align: center;
     border-radius: 118px;
     color: #FFFFFF;
+    border: none;
 `;
 const Owner = styled.p`
     color: #a59e9e;
@@ -135,7 +136,7 @@ function Product({match}) {
     }
     useEffect(() => {
         fetchData();
-        console.log(data)
+       
     // eslint-disable-next-line
     }, []);
     
