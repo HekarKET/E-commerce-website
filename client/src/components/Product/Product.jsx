@@ -1,10 +1,11 @@
 import React ,{useEffect}from 'react'
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProduct } from '../../actions/setProduct'
 import Review from './Review'
+import { addToCart } from '../../actions/setCart'
 
 const Wrapper = styled.div`
     margin-top:15px;
@@ -113,12 +114,25 @@ const RateProduct = styled.button`
 
 function Product({match}) {
     const data = useSelector(state=>state.SingleProduct)
+    const cart = useSelector(state => state.cart)
+    let history = useHistory()
     const dispatch = useDispatch()
     const fetchData = ()=>{
 
         dispatch(fetchProduct(match.params.id));
     }
-   
+    const isInCart = ()=>{
+        
+        return cart.find(element=> element._id === data.SingleProduct._id);
+    }
+
+    const addtoCart =()=>{
+        
+        dispatch(addToCart(data.SingleProduct));
+    }
+    const goToCart = ()=>{ 
+        history.push('/cart');
+    }
     useEffect(() => {
         fetchData();
         console.log(data)
@@ -132,7 +146,10 @@ function Product({match}) {
             <React.Fragment>
              <LeftContent>
                         <Image src={data.SingleProduct.Image}></Image>
-                        <AddToCart>ADD TO CART</AddToCart>
+                        {!isInCart()? 
+                            <AddToCart onClick={addtoCart}>ADD TO CART</AddToCart>:
+                            <AddToCart onClick={goToCart}>GO TO CART</AddToCart>
+                            }
                         </LeftContent>
                     <RightContent>
                     <Owner>{data.SingleProduct.Owner}</Owner>

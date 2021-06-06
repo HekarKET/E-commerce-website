@@ -5,6 +5,7 @@ import {
   FETCH_SINGLE_DATA_SUCCESS,
   REVIEW,
   REVIEW_SUCCESS,
+  
 } from "../constants/actionType";
 
 const intialState = {
@@ -26,6 +27,7 @@ export function Product(state = intialState, action) {
         loading: false,
         product: action.payload,
       };
+    
 
     default:
       return state;
@@ -51,16 +53,17 @@ export function SingleProduct(state = intialStateS, action) {
         loading: false,
         SingleProduct: action.payload,
       };
-      case REVIEW:
+    case REVIEW:
       return {
         loading: true,
         SingleProduct: action.payload,
       };
-      case REVIEW_SUCCESS:
+    case REVIEW_SUCCESS:
         return {
           loading: false,
           SingleProduct: action.payload,
         };
+    
 
     default:
       return state;

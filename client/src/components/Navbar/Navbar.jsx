@@ -45,7 +45,7 @@ function Navbar() {
             <Wrapper>
                 <NavItems>
                     <LeftItem><StyledLink to='/' >E commerce Website</StyledLink></LeftItem>
-                    <RightItems> Cart </RightItems>
+                    {userLogin.login ?<RightItems> <StyledLink to='/cart'>Cart</StyledLink> </RightItems>:null}
                     { userLogin.login ?  <RightItems><StyledLink to='/profile'>Profile</StyledLink></RightItems>:<RightItems><StyledLink to='/register'>Sign in</StyledLink></RightItems>}
                 </NavItems>  
             </Wrapper>

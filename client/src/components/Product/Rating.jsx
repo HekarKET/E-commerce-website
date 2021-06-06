@@ -4,6 +4,7 @@ import ReactStars from "react-rating-stars-component";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { reviewProduct } from '../../actions/setProduct';
+import {Redirect} from 'react-router-dom';
 
 const Wrapper = styled.div`
     width: 100%;
@@ -44,10 +45,14 @@ color: black;
 `
 
 
-function Rating() {
+function Rating({isAuth}) {
+
+    
+
     const [star, setStars] = useState(0)
     const [review, setReview] = useState("")
     const productData = useSelector(state=>state.SingleProduct)
+    const user = useSelector(state=>state.userLogin.user)
     const dispatch = useDispatch()
     const handleChange = (e)=>{
         setStars(e)
@@ -55,11 +60,17 @@ function Rating() {
       
     }
     const submitReview = ()=>{
-        const Review = {star,review,user:"Akhilesh"}
+        
+        const Review = {star,review,user:user.firstName}
         window.location.href = `/Product/${productData.SingleProduct._id}`;
         dispatch(reviewProduct(productData.SingleProduct._id,Review))
 
     }
+    if(!isAuth){
+        return <Redirect to='/login'/>
+    }
+    else{
+        
     return (
         <Wrapper>
             
@@ -84,6 +95,6 @@ function Rating() {
             <SubmitButton onClick={submitReview}>Submit</SubmitButton>
         </Wrapper>
     )
-}
+}}
 
 export default Rating

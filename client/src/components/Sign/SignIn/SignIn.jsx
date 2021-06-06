@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import { Formik, Form } from 'formik';
 import { TextField } from '../TextField';
 
-import {useHistory} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import styled from 'styled-components';
 import { userLogin } from '../../../actions/setUser';
 
@@ -16,6 +16,11 @@ const Login = styled.button`
     color: white;
     border: none;
    
+
+`
+const ErrorMessage = styled.p`
+  color: red;
+  font: 12;
 
 `
 
@@ -36,13 +41,14 @@ const Wrapper = styled.div`
 
 
 
-const SignIn= ()=> {
- const history = useHistory();
+const SignIn= ({isAuth})=> {
+
   const dispatch = useDispatch();
   const login = useSelector(state => state.userLogin)
-  if(login.login){
-    history.push('/');
+  if(isAuth){
+    return <Redirect to='/'/>
   }
+  else{
     return (
       <Formik
         initialValues={{
@@ -54,9 +60,9 @@ const SignIn= ()=> {
         }}
         
         onSubmit={values => {
-          console.log(login.login)
+         
           dispatch(userLogin(values));
-          console.log(login.login)
+         
         }}
       >
         {formik => (
@@ -66,13 +72,15 @@ const SignIn= ()=> {
               <TextField label="Email" name="email" type="text" />
               <TextField label="Password" name="password" type="password" />
               <Login type="submit">Log in</Login>
+            
+              {login.error? <ErrorMessage  > Invalid email or password </ErrorMessage>: null}
               
             </StyledForm>
           </Wrapper>
         )}
       </Formik>
     )
-  }
+  }}
 
 export default SignIn
 
