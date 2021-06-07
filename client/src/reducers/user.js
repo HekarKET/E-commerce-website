@@ -2,7 +2,6 @@ import {
   CREATE_USER,
   CREATE_USER_SUCCESS,
   LOGOUT,
- 
   UPDATE_USER_SUCCESS,
   USER_LOGIN,
   USER_LOGIN_FAILURE,
@@ -64,6 +63,7 @@ export function userLogin(state = initialState, action) {
         user: action.payload,
         isAuth:true
       }
+    
     default:
       return state;
   }

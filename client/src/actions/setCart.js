@@ -1,5 +1,10 @@
+import { paymentApi } from "../api";
 import {
   ADD_TO_CART,
+  PAYMENT,
+  PAYMENT_SUCCESFULL,
+  PAYMENT_UNSUCCESFULL,
+  REMOVE_ALL_FROM_CART,
   REMOVE_FROM_CART,
   UPDATE_CART,
 } from "../constants/actionType";
@@ -23,3 +28,24 @@ export const updateFromCart = (id, qty) => {
     localStorage.setItem("cart", JSON.stringify(getStore().cart));
   };
 };
+
+export const paymentProduct = (token,amount)=>{
+  return function(dispatch,getStore){
+    dispatch({type:PAYMENT})
+    paymentApi(token,amount)
+    .then(data=>{
+   
+      if (data.data.status === "success") {
+        dispatch({type:PAYMENT_SUCCESFULL})
+        dispatch({type:REMOVE_ALL_FROM_CART})
+        localStorage.removeItem("cart");
+      } else {
+        dispatch({type:PAYMENT_UNSUCCESFULL})
+      }
+
+    })
+    .catch(error=>{
+      console.log(error)
+    })
+  }
+}

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router'
 import styled from 'styled-components'
 import Grid from '../Cart/Grid'
 
+import StripeCheckout from "react-stripe-checkout";
+import { paymentProduct } from '../../actions/setCart'
 const LeftContent = styled.div`
     display: flex;
     flex-direction: column;
@@ -47,6 +49,8 @@ const Checkout = styled.button`
 
 function Cart({isAuth}) {
     const cartItem = useSelector(state => state.cart);
+    const user = useSelector(state => state.userLogin.user);
+    const dispatch = useDispatch()
     // console.log('rendered')
     const [countPrice, setcountPrice] = useState({})
     const handleSum = (total,num)=>{
@@ -55,10 +59,16 @@ function Cart({isAuth}) {
     const handlePrice = (total,num)=>{
         return total + parseInt(num.Price)*parseInt(num.selected)
     }
+    const handleToken = (token)=>{
+        const amount = countPrice.totalPrice
+        dispatch(paymentProduct(token,amount))
+        
+    }
     useEffect(() => {
             const sum = cartItem.reduce(handleSum,0);
             const price = cartItem.reduce(handlePrice,0);
-            setcountPrice({sum,price})
+            const totalPrice = price===0? 0: (price-100)*100;
+            setcountPrice({sum,price,totalPrice})
             
 
     }, [cartItem])
@@ -90,16 +100,29 @@ function Cart({isAuth}) {
                         <Value>{`Rs. ${countPrice.price}`}</Value>
                     </Group>
                     
-                    <Group>
+                   {countPrice.price !==0 ? <Group>
                         <Label>Discount :<span>&nbsp;&nbsp;</span></Label>
                         <Value>{`Rs. 100`}</Value>
-                    </Group>
+                    </Group>:null}
                     
                     <Group>
                         <Label>Price :<span>&nbsp;&nbsp;</span></Label>
-                        <Value>{`Rs. ${countPrice.price-100}`}</Value>
+                        <Value>{countPrice.price!==0? `Rs. ${countPrice.price-100}`:`Rs. 0`}</Value>
                     </Group>
-                    <Checkout>PROCEED TO CHECKOUT</Checkout>
+                    <Checkout>
+                        <StripeCheckout
+                            stripeKey="pk_test_51IzhazSC63LzAl40CbWXRR6BNWRvB0XS7W2to3SyxgktH5tBlfB6H3vBEA8l9Wl762wCeWxkKwtvR5j91DlQREHu00Wmu3fc6J"
+                            token={handleToken}
+                            amount={(countPrice.price-100)*100 }
+                            currency="INR"
+                            panelLabel="Pay"
+                            email={user.email}
+                            alipay
+                            
+                        >
+                            PROCEED TO CHECKOUT
+                        </StripeCheckout>
+                        </Checkout>
                 </RightContent>
                 </MainContent>
             </React.Fragment>

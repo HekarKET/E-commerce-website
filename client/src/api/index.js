@@ -14,3 +14,5 @@ export const updateUserApi = (user) =>
       Authorization: "Bearer " + user.token,
     },
   });
+
+export const paymentApi = (token,amount)=>api.post("/checkout",{token,amount})

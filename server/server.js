@@ -5,6 +5,7 @@ import UserRout from "./routes/user.js";
 
 import Mongoose from 'mongoose';
 import ProductRout from './routes/product.js'
+import PaymentRout from './routes/payment.js'
 import cors from 'cors';
 const app = express()
 app.use(cors())
@@ -17,7 +18,7 @@ app.use(cookieParser());
 
 app.use('/Product',ProductRout)
 app.use("/User", UserRout);
-
+app.use("/Checkout",PaymentRout)
 const PORT = process.env.PORT || 4000;
 Mongoose.connect(process.env.MONGODB_URL,{useNewUrlParser:true,useUnifiedTopology:true})
 .then(()=>{app.listen(PORT,()=>{
