@@ -47,38 +47,58 @@ const Delete = styled.button`
     border:none;
 `
 
-function Grid({id,title,owner,price,image,quantity,selected}) {
+function Grid({id,title,owner,price,image,quantity,selected,yourOrder}) {
     const dispatch = useDispatch()
-    const handleQtychange = (e)=>{  
-        dispatch(updateFromCart(id,e.target.value));
-    }
-    const handleDelete =  (e)=>{
-        
-        dispatch(removeFromCart(id))
-    }
-  
-    return (
-       
+
+    if(!yourOrder){
+        const handleQtychange = (e)=>{  
+            dispatch(updateFromCart(id,e.target.value));
+        }
+        const handleDelete =  (e)=>{
             
-                <Item>
-                    <Image src={image}/>
-                    <Info>
-                        <Owner>{owner}</Owner>
-                        <Description>{title}</Description>
-                    </Info>
-                    <select value={selected} onChange={handleQtychange} >
-                      {[...Array(quantity).keys()].map(x =>
-                        <option key={x + 1} value={x + 1}>{x + 1}</option>
-                      )}
-                    </select>
-                    
-                    <Price><strong>Price:</strong>{` Rs. ${price}`}</Price>
-                    <Delete onClick={handleDelete}>Delete</Delete>
-                </Item>
-            
+            dispatch(removeFromCart(id))
+        }
+      
+        return (
            
-     
-    )
+                
+                    <Item>
+                        <Image src={image}/>
+                        <Info>
+                            <Owner>{owner}</Owner>
+                            <Description>{title}</Description>
+                        </Info>
+                        <select value={selected} onChange={handleQtychange} >
+                          {[...Array(quantity).keys()].map(x =>
+                            <option key={x + 1} value={x + 1}>{x + 1}</option>
+                          )}
+                        </select>
+                        
+                        <Price><strong>Price:</strong>{` Rs. ${price}`}</Price>
+                        <Delete onClick={handleDelete}>Delete</Delete>
+                    </Item>
+                
+               
+         
+        )
+    }
+    else{    
+        return (
+           
+                
+                    <Item>
+                        <Image src={image}/>
+                        <Info>
+                            <Owner>{owner}</Owner>
+                            <Description>{title}</Description>
+                        </Info>                     
+                        <Price><strong>Price:</strong>{` Rs. ${price}`}</Price>
+                       
+                    </Item>      
+         
+        )
+    }
+    
 }
 
 export default Grid

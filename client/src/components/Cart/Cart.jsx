@@ -7,6 +7,7 @@ import Grid from '../Cart/Grid'
 import StripeCheckout from "react-stripe-checkout";
 import { paymentProduct } from '../../actions/setCart'
 import { updateOrders } from '../../actions/setUser'
+import { Link } from 'react-router-dom'
 const LeftContent = styled.div`
     display: flex;
     flex-direction: column;
@@ -37,6 +38,16 @@ const Value = styled.p``
 const Group = styled.div`
     display: flex;
     margin: 10px;
+`
+const StyledLink = styled(Link)`
+
+    text-decoration: none;
+    color: white;
+     &:hover {
+        text-decoration: none;
+        color: red;
+    }
+
 `
 
 const Checkout = styled.button`
@@ -116,19 +127,28 @@ function Cart({isAuth}) {
                         <Value>{countPrice.price!==0? `Rs. ${countPrice.price-100}`:`Rs. 0`}</Value>
                     </Group>
                     <Checkout>
-                        <StripeCheckout
-                            stripeKey="pk_test_51IzhazSC63LzAl40CbWXRR6BNWRvB0XS7W2to3SyxgktH5tBlfB6H3vBEA8l9Wl762wCeWxkKwtvR5j91DlQREHu00Wmu3fc6J"
-                            token={handleToken}
-                            amount={(countPrice.price-100)*100 }
-                            currency="INR"
-                            panelLabel="Pay"
-                            email={user.email}
-                            alipay
+                        {countPrice.totalPrice!==0?
+                           <StripeCheckout
+                           stripeKey="pk_test_51IzhazSC63LzAl40CbWXRR6BNWRvB0XS7W2to3SyxgktH5tBlfB6H3vBEA8l9Wl762wCeWxkKwtvR5j91DlQREHu00Wmu3fc6J"
+                           token={handleToken}
+                           amount={(countPrice.price-100)*100 }
+                           currency="INR"
+                           panelLabel="Pay"
+                           email={user.email}
+                           alipay
+                           
+                       >
+                           PROCEED TO CHECKOUT
+                       </StripeCheckout>
+                       :
+                       <StyledLink to='/'>
+                       CHECK OUR PRODUCTS
+                       </StyledLink>
                             
-                        >
-                            PROCEED TO CHECKOUT
-                        </StripeCheckout>
-                        </Checkout>
+                    
+                        }
+                     
+                    </Checkout>
                 </RightContent>
                 </MainContent>
             </React.Fragment>

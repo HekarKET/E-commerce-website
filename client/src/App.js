@@ -10,6 +10,7 @@ import SignIn from "./components/Sign/SignIn/SignIn";
 import Profile from "./components/Profile/Profile";
 import { useSelector } from "react-redux";
 import Cart from "./components/Cart/Cart";
+import Order from "./components/Orders/Order";
 function App() {
   const auth = useSelector((state) => state.userLogin.isAuth);
   return (
@@ -23,13 +24,23 @@ function App() {
             path="/review/:id"
             component={() => <Rating isAuth={auth} />}
           ></Route>
-          <Route path="/register" component={() => <SignUp isAuth={auth}  />}></Route>
-          <Route path="/login" component={() => <SignIn isAuth={auth}  />}></Route>
+          <Route
+            path="/register"
+            component={() => <SignUp isAuth={auth} />}
+          ></Route>
+          <Route
+            path="/login"
+            component={() => <SignIn isAuth={auth} />}
+          ></Route>
+          <Route
+            path="/your-orders"
+            component={() => <Order isAuth={auth} />}
+          ></Route>
           <Route
             path="/profile"
             component={() => <Profile isAuth={auth} />}
           ></Route>
-          <Route path="/cart" component={() => <Cart isAuth={auth}  />}></Route>
+          <Route path="/cart" component={() => <Cart isAuth={auth} />}></Route>
         </Switch>
       </Router>
     </React.Fragment>

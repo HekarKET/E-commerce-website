@@ -82,10 +82,10 @@ export const updateOrders = (user,orderIds)=>{
     
     userOrderUpdateApi(user,orderIds)
     .then(data=>{
-      
-      dispatch({type:UPDATE_USER_ORDERS,payload:data.data})
+      dispatch({ type: UPDATE_USER_ORDERS, payload: data.data });
+      // console.log(data.data);
       localStorage.setItem("userInfo", JSON.stringify(data.data));
-      dispatch({  type:REMOVE_ALL_FROM_CART})
+      dispatch({ type: REMOVE_ALL_FROM_CART });
       localStorage.removeItem("cart");
     })
     .catch()

@@ -96,9 +96,9 @@ export const updateOrder = async (req, res) => {
     const userInfo = await userModel.findById(id);
     userInfo.orders.push(...orderIds);
     const user = await userModel
-      .findByIdAndUpdate(id, userInfo)
+      .findByIdAndUpdate(id, userInfo, { new: true })
       .populate("orders");
-
+    //console.log(user);
     res.status(201).send({
       id: user._id,
       firstName: user.firstName,

@@ -2,9 +2,7 @@ import express from "express";
 import { v4 as uuidv4 } from "uuid";
 import stripe from "stripe";
 const Router = express.Router();
-const StripeObject = stripe(
-  "sk_test_51IzhazSC63LzAl40YSPwJvljymzGwWeJUqGJN4qIO7xDjgLzfksDJ7BSpLGhyStYZV9D16BSrOtAM3NmfFv6JQhV00qqUHcMx3"
-);
+const StripeObject = stripe(process.env.STRIPE_KEY);
 Router.post("/", async (req, res) => {
   console.log("Request:", req.body);
 
