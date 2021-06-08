@@ -2,6 +2,7 @@ import {
   CREATE_USER,
   CREATE_USER_SUCCESS,
   LOGOUT,
+  UPDATE_USER_ORDERS,
   UPDATE_USER_SUCCESS,
   USER_LOGIN,
   USER_LOGIN_FAILURE,
@@ -32,12 +33,12 @@ export function userLogin(state = initialState, action) {
         isAuth: true,
       };
     case USER_LOGIN_FAILURE:
-      return{
+      return {
         login: false,
         user: {},
         isAuth: false,
-        error:true
-      }
+        error: true,
+      };
     case CREATE_USER:
       return {
         login: false,
@@ -49,21 +50,26 @@ export function userLogin(state = initialState, action) {
         user: action.payload,
         isAuth: true,
       };
-    
+
     case LOGOUT:
       return {
         login: false,
         user: {},
         isAuth: false,
       };
-    
+
     case UPDATE_USER_SUCCESS:
-      return{
+      return {
         login: true,
         user: action.payload,
-        isAuth:true
-      }
-    
+        isAuth: true,
+      };
+    case UPDATE_USER_ORDERS:
+      return {
+        login: true,
+        user: action.payload,
+        isAuth: true,
+      };
     default:
       return state;
   }

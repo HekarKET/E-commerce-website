@@ -16,3 +16,10 @@ export const updateUserApi = (user) =>
   });
 
 export const paymentApi = (token,amount)=>api.post("/checkout",{token,amount})
+
+export const userOrderUpdateApi = (user, orderId) =>
+  api.patch(`/User/orders/${user.id}`, orderId, {
+    headers: {
+      Authorization: "Bearer " + user.token,
+    },
+  });

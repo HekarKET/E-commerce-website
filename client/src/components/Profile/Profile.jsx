@@ -73,7 +73,7 @@ function Profile({isAuth}) {
     
     const handelSubmit = (e)=>{
         e.preventDefault();
-        
+        console.log(user.orders)
         dispatch(updateUser(state))
     }
     const handleImage = (element)=>{

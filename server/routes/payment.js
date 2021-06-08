@@ -43,10 +43,11 @@ Router.post("/", async (req, res) => {
     );
 
     status = "success";
+    res.status(201).send({ error, status });
+    
   } catch (error) {
     status = "failure";
+    res.status(201).send({ error, status });
   }
-
-  res.json({ error, status });
 });
 export default Router;

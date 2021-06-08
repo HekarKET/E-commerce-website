@@ -4,7 +4,7 @@ import {
   PAYMENT,
   PAYMENT_SUCCESFULL,
   PAYMENT_UNSUCCESFULL,
-  REMOVE_ALL_FROM_CART,
+
   REMOVE_FROM_CART,
   UPDATE_CART,
 } from "../constants/actionType";
@@ -36,9 +36,7 @@ export const paymentProduct = (token,amount)=>{
     .then(data=>{
    
       if (data.data.status === "success") {
-        dispatch({type:PAYMENT_SUCCESFULL})
-        dispatch({type:REMOVE_ALL_FROM_CART})
-        localStorage.removeItem("cart");
+        dispatch({ type: PAYMENT_SUCCESFULL });
       } else {
         dispatch({type:PAYMENT_UNSUCCESFULL})
       }

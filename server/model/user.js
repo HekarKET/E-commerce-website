@@ -10,7 +10,7 @@ const UserSchema = mongoose.Schema({
     type: String,
     default: null,
   },
-  // orders: [{ type: mongoose.Schema.Types.ObjectId, ref: "Products" }],
+  orders: [{ type: mongoose.Schema.Types.ObjectId, ref: "Products" }],
 });
 
 const userModel = mongoose.model("User", UserSchema);

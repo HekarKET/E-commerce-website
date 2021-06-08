@@ -6,6 +6,7 @@ import Grid from '../Cart/Grid'
 
 import StripeCheckout from "react-stripe-checkout";
 import { paymentProduct } from '../../actions/setCart'
+import { updateOrders } from '../../actions/setUser'
 const LeftContent = styled.div`
     display: flex;
     flex-direction: column;
@@ -61,13 +62,18 @@ function Cart({isAuth}) {
     }
     const handleToken = (token)=>{
         const amount = countPrice.totalPrice
-        dispatch(paymentProduct(token,amount))
+        const orderId = cartItem.map(item=>(item._id));
+        dispatch(paymentProduct(token,amount))  
+        dispatch(updateOrders(user,orderId))
+     
         
     }
     useEffect(() => {
             const sum = cartItem.reduce(handleSum,0);
             const price = cartItem.reduce(handlePrice,0);
             const totalPrice = price===0? 0: (price-100)*100;
+            
+            
             setcountPrice({sum,price,totalPrice})
             
 

@@ -1,4 +1,4 @@
-import { createUserApi, loginUserApi, updateUserApi } from "../api";
+import { createUserApi, loginUserApi, updateUserApi,userOrderUpdateApi } from "../api";
 
 import {
   CREATE_USER,
@@ -9,6 +9,8 @@ import {
  
   UPDATE_USER_SUCCESS,
   USER_LOGIN_SUCCESS,
+  UPDATE_USER_ORDERS,
+  REMOVE_ALL_FROM_CART,
 } from "../constants/actionType";
 
 
@@ -74,4 +76,22 @@ export const userLogout = () => {
     type: LOGOUT,
   };
 };
+
+export const updateOrders = (user,orderIds)=>{
+  return function(dispatch){
+    
+    userOrderUpdateApi(user,orderIds)
+    .then(data=>{
+      
+      dispatch({type:UPDATE_USER_ORDERS,payload:data.data})
+      localStorage.setItem("userInfo", JSON.stringify(data.data));
+      dispatch({  type:REMOVE_ALL_FROM_CART})
+      localStorage.removeItem("cart");
+    })
+    .catch()
+
+  }
+
+}
+
 
