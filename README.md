@@ -1,6 +1,6 @@
 # E-commerce-website
 
-### This is a E commerce website made with python-django and vanilla javascript.
+### This is a E commerce website made with MERN stack.
 
 ### Some Features
 * **Easy UI** </br>
