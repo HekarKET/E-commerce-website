@@ -1,15 +1,17 @@
 # E-commerce-website
 
-### This is a Blogging website made with python-django and vanilla javascript.
+### This is a E commerce website made with python-django and vanilla javascript.
 
 ### Some Features
-* **Easy UI**
+* **Easy UI** </br>
 The UI of the website is supereasy to use and consists of required help-texts and visual feedback.
-* **Payment integration**
+* **Payment integration**</br>
 The primary integration path through Stripe. js is with Stripe Elements, which enables you to collect sensitive payment information using customizable UI components. 
-* **Profile Update functionality**
+* **Profile Update functionality**</br>
 You can create a profile and personalize it in your own way by adding the profilepic changing username and all kinds of normal stuffs.
-* **JWT authentication**
+* **CRUD functionality**</br>
+User can add,delete,create and view product.
+* **JWT authentication**</br>
 In authentication, when the user successfully logs in using their credentials, a JSON Web Token will be returned and must be saved locally (typically in local storage, but cookies can be also used), instead of the traditional approach of creating a session in the server and returning a cookie.
 
 
