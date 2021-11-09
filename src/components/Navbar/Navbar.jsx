@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Dropdown } from "react-bootstrap";
+import { useDispatch } from 'react-redux';
+import { filterProduct } from '../../actions/setProduct';
 
 const Wrapper = styled.div`
   height: 100px;
@@ -40,30 +42,28 @@ const RightItems = styled.li`
 
 function Navbar() {
   const userLogin = useSelector((state) => state.userLogin);
+  const dispatch = useDispatch()
   return (
     <React.Fragment>
       <Wrapper>
         <NavItems>
           <LeftItem>
-            <StyledLink to="/">FASHION FACTORY</StyledLink>
+            <StyledLink to='/'>FASHION FACTORY</StyledLink>
           </LeftItem>
 
           {userLogin.login ? (
             <RightItems>
               {" "}
-              <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  Dropdown Button
+              <Dropdown onSelect={(e,b)=>dispatch(filterProduct(e))}>
+                <Dropdown.Toggle variant='success' id='dropdown-basic'>
+                  Filter
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                  <Dropdown.Item href="#/action-2">
-                    Another action
-                  </Dropdown.Item>
-                  <Dropdown.Item href="#/action-3">
-                    Something else
-                  </Dropdown.Item>
+                  <Dropdown.Item eventKey="trouser" >trouser</Dropdown.Item>
+                  <Dropdown.Item eventKey="party">party</Dropdown.Item>
+                  <Dropdown.Item eventKey="shirt">shirt</Dropdown.Item>
+                  <Dropdown.Item eventKey="casaul">casaul</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </RightItems>
@@ -72,24 +72,24 @@ function Navbar() {
           {userLogin.login ? (
             <RightItems>
               {" "}
-              <StyledLink to="/cart">Cart</StyledLink>{" "}
+              <StyledLink to='/cart'>Cart</StyledLink>{" "}
             </RightItems>
           ) : null}
 
           {userLogin.login ? (
             <RightItems>
               {" "}
-              <StyledLink to="/your-orders">Previous orders</StyledLink>{" "}
+              <StyledLink to='/your-orders'>Previous orders</StyledLink>{" "}
             </RightItems>
           ) : null}
 
           {userLogin.login ? (
             <RightItems>
-              <StyledLink to="/profile">Profile</StyledLink>
+              <StyledLink to='/profile'>Profile</StyledLink>
             </RightItems>
           ) : (
             <RightItems>
-              <StyledLink to="/register">Sign in</StyledLink>
+              <StyledLink to='/register'>Sign in</StyledLink>
             </RightItems>
           )}
         </NavItems>

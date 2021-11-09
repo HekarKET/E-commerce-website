@@ -11,6 +11,7 @@ import Profile from "./components/Profile/Profile";
 import { useSelector } from "react-redux";
 import Cart from "./components/Cart/Cart";
 import Order from "./components/Orders/Order";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const auth = useSelector((state) => state.userLogin.isAuth);

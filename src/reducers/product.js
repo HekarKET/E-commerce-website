@@ -32,12 +32,13 @@ export function Product(state = intialState, action) {
       };
     case FILTER_DATA:
       let filterproduct = state.product;
-      filterproduct = filterproduct.filter((item) =>
-        item.Tags.contains(action.payload)
-      );
+      filterproduct = filterproduct.filter(item=>  item.Tags.includes(action.payload) )
+      // filterproduct = filterproduct.filter((item) =>
+      //   item.Tags.contains(action.payload)
+      // );
       return {
         loading: false,
-        product: action.payload,
+        product: state.product,
         filterproduct: filterproduct,
       };
     default:
